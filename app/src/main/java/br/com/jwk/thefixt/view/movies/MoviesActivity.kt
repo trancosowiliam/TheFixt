@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import br.com.jwk.thefixt.R
 import br.com.jwk.thefixt.data.model.Movie
+import br.com.jwk.thefixt.ext.isNetworkConnected
 import br.com.jwk.thefixt.ext.isVisible
 import br.com.jwk.thefixt.ext.logi
 import br.com.jwk.thefixt.ext.makeDialog
@@ -36,6 +37,14 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
         }
     }
 
+    override fun loginLoaded() {
+        if (isNetworkConnected) {
+            presenter.loadRemoteStoreMovies()
+        } else {
+            presenter.loadLocalStoreMovies()
+        }
+    }
+
     override fun showLoading() {
         pbLoading.isVisible = true
     }
@@ -45,7 +54,7 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun showMessage(title: String, message: String) {
-        makeDialog(null, message)
+        makeDialog(title, message)
                 .positiveButton(text = "Ok")
                 .show()
     }

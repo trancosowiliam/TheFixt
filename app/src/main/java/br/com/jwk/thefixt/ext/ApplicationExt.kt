@@ -1,7 +1,9 @@
 package br.com.jwk.thefixt.ext
 
 import android.content.Context
+import android.net.ConnectivityManager
 import com.afollestad.materialdialogs.MaterialDialog
+
 
 fun Context.makeDialog(showTitle: String?, showMessage: String?): MaterialDialog {
     return MaterialDialog(this).apply {
@@ -14,3 +16,6 @@ fun Context.makeDialog(showTitle: String?, showMessage: String?): MaterialDialog
         }
     }
 }
+
+val Context.isNetworkConnected
+    get() = (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?)?.activeNetworkInfo != null

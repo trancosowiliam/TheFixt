@@ -9,6 +9,16 @@ class MoviesPresenter(val service: OMDbService, val ownerService: OwnerService) 
     override lateinit var view: MoviesContract.View
 
     override fun init() {
+        view.showLoading()
+
+        if (!ownerService.isLogged()) {
+            ownerService.login("thefixt", "123456", {
+                view.hideLoading()
+                view.loginLoaded()
+            }, {
+                view.showMessage("Falhou", it)
+            })
+        }
     }
 
     override fun loadRemoteStoreMovies() {
