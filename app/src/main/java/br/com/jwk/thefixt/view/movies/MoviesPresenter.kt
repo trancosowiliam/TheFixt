@@ -7,6 +7,9 @@ class MoviesPresenter(val service: OMDbService) : MoviesContract.Presenter {
 
     override lateinit var view: MoviesContract.View
 
+    override fun init() {
+    }
+
     override fun loadRemoteStoreMovies() {
     }
 
