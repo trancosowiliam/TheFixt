@@ -15,6 +15,7 @@ class ParseServiceImpl(private val context: Context) : ParseService {
                 .applicationId(BuildConfig.BACKAPP_APP_ID)
                 .clientKey(BuildConfig.BACKAPP_CLIENT_KEY)
                 .server(BuildConfig.BACKAPP_SERVER_URL)
+                .enableLocalDataStore()
                 .build()
         )
 

@@ -20,5 +20,6 @@ interface MoviesContract {
         fun storeMoviesLoaded(movies: List<Movie>)
         fun searchMoviesLoaded(movies: List<Movie>)
         fun moviewSaved(movie: Movie)
+        fun onLoginError()
     }
 }

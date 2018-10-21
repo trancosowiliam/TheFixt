@@ -21,17 +21,26 @@ class MoviesPresenter(val service: OMDbService, val ownerService: OwnerService) 
             ownerService.login("thefixt", "123456", {
                 view.hideLoading()
                 view.loginLoaded()
-            }, onDefaultError)
+            }, {
+                view.onLoginError()
+            })
         }
     }
 
     override fun loadRemoteStoreMovies() {
+        view.showLoading()
+
         ownerService.loadRemoteStoreMovies({
+            view.hideLoading()
             view.storeMoviesLoaded(it)
         }, onDefaultError)
     }
 
     override fun loadLocalStoreMovies() {
+        ownerService.loadLocalStoreMovies({
+            view.hideLoading()
+            view.storeMoviesLoaded(it)
+        }, onDefaultError)
     }
 
     override fun searchMovies(title: String, page: Int) {

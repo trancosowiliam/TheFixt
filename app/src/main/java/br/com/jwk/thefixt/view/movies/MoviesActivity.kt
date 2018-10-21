@@ -20,11 +20,17 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
 
     override val presenter by inject<MoviesContract.Presenter>()
 
+    val adapter by lazy { MoviesAdapter(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
 
         presenter(this)
+
+        recMovies.adapter = adapter
+        recMovies.layoutManager = GridLayoutManager(this, 2)
+        recMovies.addItemDecoration(MoviesItemDecoration(2, 8.px))
 
         edtSearch.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -34,6 +40,8 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
 
             false
         }
+
+        removeEditTextFocus()
     }
 
     override fun loginLoaded() {
@@ -59,11 +67,7 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun storeMoviesLoaded(movies: List<Movie>) {
-        recMovies.layoutManager = GridLayoutManager(this, 2)
-        recMovies.adapter = MoviesAdapter(this, movies)
-        recMovies.addItemDecoration(MoviesItemDecoration(2, 8.px))
-
-        movies.toString().logi()
+        adapter.movies = movies.toMutableList()
     }
 
     override fun searchMoviesLoaded(movies: List<Movie>) {
@@ -82,7 +86,7 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun moviewSaved(movie: Movie) {
-        movie.toString().logi()
+        adapter.add(movie)
     }
 
     private fun removeEditTextFocus() {
@@ -93,4 +97,12 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
 
         edtSearch.isCursorVisible = false
     }
+
+    override fun onLoginError() {
+        makeDialog("Falha", "Falha ao efetuar login, o aplicativo será fechado!")
+                .positiveButton(text = "Ok") { finish() }
+                .show()
+
+    }
+
 }

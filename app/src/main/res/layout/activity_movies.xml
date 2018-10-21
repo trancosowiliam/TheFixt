@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#dcedfd"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".view.movies.MoviesActivity">
+
+    <requestFocus />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/mvsTxtTitle"

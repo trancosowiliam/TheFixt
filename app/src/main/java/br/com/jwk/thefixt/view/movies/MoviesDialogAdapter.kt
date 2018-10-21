@@ -10,7 +10,7 @@ import br.com.jwk.thefixt.data.model.Movie
 import br.com.jwk.thefixt.ext.loadImage
 import kotlinx.android.synthetic.main.item_movie_dialog.view.*
 
-class MoviesDialogAdapter(context: Context, val movies: List<Movie>) : RecyclerView.Adapter<MoviesDialogAdapter.Holder>() {
+class MoviesDialogAdapter(context: Context, var movies: List<Movie>) : RecyclerView.Adapter<MoviesDialogAdapter.Holder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
     var onItemClick: ((Movie) -> Unit)? = null
@@ -24,7 +24,6 @@ class MoviesDialogAdapter(context: Context, val movies: List<Movie>) : RecyclerV
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.render(movies[position])
     }
-
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {

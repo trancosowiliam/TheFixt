@@ -10,7 +10,13 @@ import br.com.jwk.thefixt.data.model.Movie
 import br.com.jwk.thefixt.ext.loadImage
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MoviesAdapter(context: Context, val movies: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.Holder>() {
+class MoviesAdapter(context: Context) : RecyclerView.Adapter<MoviesAdapter.Holder>() {
+
+    var movies = mutableListOf<Movie>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     private val layoutInflater = LayoutInflater.from(context)
 
@@ -22,6 +28,11 @@ class MoviesAdapter(context: Context, val movies: List<Movie>) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.render(movies[position])
+    }
+
+    fun add(movie: Movie) {
+        movies.add(movie)
+        notifyDataSetChanged()
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
