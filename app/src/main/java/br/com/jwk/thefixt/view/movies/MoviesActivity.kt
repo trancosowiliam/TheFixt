@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.jwk.thefixt.R
 import br.com.jwk.thefixt.data.model.Movie
 import br.com.jwk.thefixt.ext.logi
+import br.com.jwk.thefixt.ext.makeDialog
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.customListAdapter
 import org.koin.android.ext.android.inject
@@ -42,7 +43,9 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun showMessage(title: String, message: String) {
-        message.logi()
+        makeDialog(null, message)
+                .positiveButton(text = "Ok")
+                .show()
     }
 
     override fun storeMoviesLoaded(movies: List<Movie>) {

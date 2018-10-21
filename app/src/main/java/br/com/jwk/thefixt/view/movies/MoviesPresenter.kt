@@ -19,13 +19,13 @@ class MoviesPresenter(val service: OMDbService) : MoviesContract.Presenter {
         service.searchMovies(title, page, { movies, _ ->
             view.hideLoading()
             if (movies.isEmpty()) {
-                view.showMessage("", "Nenhum filme foi encontrado")
+                view.showMessage("Falhou!", "Nenhum filme foi encontrado")
             } else {
                 view.searchMoviesLoaded(movies)
             }
         }, { error ->
             view.hideLoading()
-            view.showMessage("", error)
+            view.showMessage("Falhou!", error)
         })
     }
 
