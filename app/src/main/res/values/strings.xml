@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TheFixt</string>
+    <string name="hint_search_movie">Busque por filmes</string>
 </resources>

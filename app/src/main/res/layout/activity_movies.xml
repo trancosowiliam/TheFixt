@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".view.movies.MoviesActivity">
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/mvsEdtSearch"
+        style="@style/EditText.SearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_search_movie"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
