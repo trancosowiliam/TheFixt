@@ -85,8 +85,9 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
         dialog.show()
     }
 
-    override fun moviewSaved(movie: Movie) {
+    override fun movieSaved(movie: Movie) {
         adapter.add(movie)
+        edtSearch.setText("")
     }
 
     private fun removeEditTextFocus() {

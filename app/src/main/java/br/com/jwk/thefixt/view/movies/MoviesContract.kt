@@ -19,7 +19,7 @@ interface MoviesContract {
         fun loginLoaded()
         fun storeMoviesLoaded(movies: List<Movie>)
         fun searchMoviesLoaded(movies: List<Movie>)
-        fun moviewSaved(movie: Movie)
+        fun movieSaved(movie: Movie)
         fun onLoginError()
     }
 }

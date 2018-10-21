@@ -9,6 +9,7 @@ internal fun Movie.toParseObject() =
             put("imdbID", imdbID)
             put("title", title)
             put("img", img)
+            put("year", year)
             put("duration", duration)
             put("belongTo", ParseUser.getCurrentUser())
         }
@@ -18,5 +19,6 @@ internal fun ParseObject.toMovie() =
                 getString("imdbID"),
                 getString("title"),
                 getString("img"),
+                getString("year") ?: "",
                 getString("duration")
         )

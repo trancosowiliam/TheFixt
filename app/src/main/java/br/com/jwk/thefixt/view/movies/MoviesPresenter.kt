@@ -62,7 +62,7 @@ class MoviesPresenter(val service: OMDbService, val ownerService: OwnerService) 
         service.searchMovie(partialMovie.imdbID, { movie ->
             ownerService.save(movie, {
                 view.hideLoading()
-                view.moviewSaved(movie)
+                view.movieSaved(movie)
             }, onDefaultError)
         }, onDefaultError)
     }

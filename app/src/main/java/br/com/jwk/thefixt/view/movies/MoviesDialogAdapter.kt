@@ -34,6 +34,7 @@ class MoviesDialogAdapter(context: Context, var movies: List<Movie>) : RecyclerV
 
         fun render(movie: Movie) {
             itemView.imdTxtName.text = movie.title
+            itemView.imdTxtYear.text = movie.year
             itemView.imdImgPoster.loadImage(movie.img)
         }
     }
