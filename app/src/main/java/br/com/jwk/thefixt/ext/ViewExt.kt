@@ -1,5 +1,6 @@
 package br.com.jwk.thefixt.ext
 
+import android.content.res.Resources
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -20,3 +21,5 @@ fun ImageView.loadImage(photoUrl: String) {
 //            .apply { if (circle) this.apply(RequestOptions.circleCropTransform()) }
             .into(this)
 }
+val Int.px: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()

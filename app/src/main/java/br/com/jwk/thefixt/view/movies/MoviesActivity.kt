@@ -5,17 +5,16 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import br.com.jwk.thefixt.R
 import br.com.jwk.thefixt.data.model.Movie
-import br.com.jwk.thefixt.ext.isNetworkConnected
-import br.com.jwk.thefixt.ext.isVisible
-import br.com.jwk.thefixt.ext.logi
-import br.com.jwk.thefixt.ext.makeDialog
+import br.com.jwk.thefixt.ext.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.customListAdapter
 import org.koin.android.ext.android.inject
 import kotlinx.android.synthetic.main.activity_movies.mvsEdtSearch as edtSearch
 import kotlinx.android.synthetic.main.activity_movies.mvsPbLoading as pbLoading
+import kotlinx.android.synthetic.main.activity_movies.msvRecMovies as recMovies
 
 class MoviesActivity : AppCompatActivity(), MoviesContract.View {
 
@@ -60,6 +59,10 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun storeMoviesLoaded(movies: List<Movie>) {
+        recMovies.layoutManager = GridLayoutManager(this, 2)
+        recMovies.adapter = MoviesAdapter(this, movies)
+        recMovies.addItemDecoration(MoviesItemDecoration(2, 8.px))
+
         movies.toString().logi()
     }
 
