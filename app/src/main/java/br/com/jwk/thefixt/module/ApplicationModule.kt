@@ -5,5 +5,5 @@ import br.com.jwk.thefixt.view.movies.MoviesPresenter
 import org.koin.dsl.module.applicationContext
 
 val applicationModule = applicationContext {
-    factory { MoviesPresenter(service = get()) as MoviesContract.Presenter }
+    factory { MoviesPresenter(service = get(), ownerService = get()) as MoviesContract.Presenter }
 }
