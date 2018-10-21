@@ -12,6 +12,16 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        manifestPlaceholders = [
+                backapp_server_url: getPropertie("backapp_server_url"),
+                backapp_app_id    : getPropertie("backapp_app_id"),
+                backapp_client_key: getPropertie("backapp_client_key")
+        ]
+
+        buildConfigField("String", "BACKAPP_SERVER_URL", "\"${getPropertie("backapp_server_url")}\"")
+        buildConfigField("String", "BACKAPP_APP_ID", "\"${getPropertie("backapp_app_id")}\"")
+        buildConfigField("String", "BACKAPP_CLIENT_KEY", "\"${getPropertie("backapp_client_key")}\"")
+
         buildConfigField("String", "OMDB_API_KEY", "\"574385e1\"")
     }
     buildTypes {
@@ -22,6 +32,12 @@ android {
     }
 }
 
+def getPropertie(key) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('secret.properties')))
+    return props[key]
+}
+
 ext {
     xappcompatVersion = "1.0.0"
     constraintLayoutVersion = "1.1.3"
@@ -29,6 +45,7 @@ ext {
 
     materialDialogVersion = "2.0.0-beta4"
 
+    parseServerVersion = "1.16.3"
     retrofitVersion = "2.4.0"
     okhttp3LoggingInterceptor = "3.10.0"
 
@@ -46,6 +63,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "org.koin:koin-android:$koinVersion"
 
+    implementation "com.parse:parse-android:$parseServerVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3LoggingInterceptor"

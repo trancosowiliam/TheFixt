@@ -13,6 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="${backapp_server_url}" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="${backapp_app_id}" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="${backapp_client_key}" />
+
         <activity
             android:name=".view.movies.MoviesActivity"
             android:screenOrientation="portrait">
