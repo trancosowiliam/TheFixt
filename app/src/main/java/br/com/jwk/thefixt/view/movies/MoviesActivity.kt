@@ -65,7 +65,10 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
 
     override fun searchMoviesLoaded(movies: List<Movie>) {
         val adapter = MoviesDialogAdapter(this, movies)
-        val dialog = MaterialDialog(this).customListAdapter(adapter)
+        val dialog = MaterialDialog(this)
+                .title(text = "Salvar na biblioteca")
+                .negativeButton(text = "Cancelar")
+                .customListAdapter(adapter)
 
         adapter.onItemClick = { movie ->
             dialog.dismiss()

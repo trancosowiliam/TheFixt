@@ -10,7 +10,7 @@ interface OMDbApi {
 
     @GET("/")
     fun searchMovie(
-            @Query("i") omdbId: String,
+            @Query("i") imdbId: String,
             @Query("apikey") apikey: String
     ): Call<MovieDto>
 

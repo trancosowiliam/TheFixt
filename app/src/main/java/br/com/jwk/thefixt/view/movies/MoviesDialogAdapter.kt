@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.jwk.thefixt.R
 import br.com.jwk.thefixt.data.model.Movie
+import br.com.jwk.thefixt.ext.loadImage
 import kotlinx.android.synthetic.main.item_movie_dialog.view.*
 
 class MoviesDialogAdapter(context: Context, val movies: List<Movie>) : RecyclerView.Adapter<MoviesDialogAdapter.Holder>() {
@@ -34,6 +35,7 @@ class MoviesDialogAdapter(context: Context, val movies: List<Movie>) : RecyclerV
 
         fun render(movie: Movie) {
             itemView.imdTxtName.text = movie.title
+            itemView.imdImgPoster.loadImage(movie.img)
         }
     }
 }
