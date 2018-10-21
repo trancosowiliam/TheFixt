@@ -1,19 +1,21 @@
 package br.com.jwk.thefixt.view.movies
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import br.com.jwk.thefixt.R
 import br.com.jwk.thefixt.data.model.Movie
 import br.com.jwk.thefixt.ext.logi
-import kotlinx.android.synthetic.main.activity_movies.mvsEdtSearch as edtSearch
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.customListAdapter
 import org.koin.android.ext.android.inject
+import kotlinx.android.synthetic.main.activity_movies.mvsEdtSearch as edtSearch
 
 class MoviesActivity : AppCompatActivity(), MoviesContract.View {
 
-    override val presenter by inject< MoviesContract.Presenter>()
+    override val presenter by inject<MoviesContract.Presenter>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +50,15 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun searchMoviesLoaded(movies: List<Movie>) {
-        movies.toString().logi()
+        val adapter = MoviesDialogAdapter(this, movies)
+        val dialog = MaterialDialog(this).customListAdapter(adapter)
+
+        adapter.onItemClick = {
+            it.title.logi()
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     override fun moviewSaved(movie: Movie) {
