@@ -7,12 +7,14 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import br.com.jwk.thefixt.R
 import br.com.jwk.thefixt.data.model.Movie
+import br.com.jwk.thefixt.ext.isVisible
 import br.com.jwk.thefixt.ext.logi
 import br.com.jwk.thefixt.ext.makeDialog
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.customListAdapter
 import org.koin.android.ext.android.inject
 import kotlinx.android.synthetic.main.activity_movies.mvsEdtSearch as edtSearch
+import kotlinx.android.synthetic.main.activity_movies.mvsPbLoading as pbLoading
 
 class MoviesActivity : AppCompatActivity(), MoviesContract.View {
 
@@ -35,11 +37,11 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
     }
 
     override fun showLoading() {
-        "show loading".logi()
+        pbLoading.isVisible = true
     }
 
     override fun hideLoading() {
-        "hide loading".logi()
+        pbLoading.isVisible = false
     }
 
     override fun showMessage(title: String, message: String) {
