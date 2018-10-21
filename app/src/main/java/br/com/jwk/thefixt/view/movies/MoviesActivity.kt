@@ -67,9 +67,9 @@ class MoviesActivity : AppCompatActivity(), MoviesContract.View {
         val adapter = MoviesDialogAdapter(this, movies)
         val dialog = MaterialDialog(this).customListAdapter(adapter)
 
-        adapter.onItemClick = {
-            it.title.logi()
+        adapter.onItemClick = { movie ->
             dialog.dismiss()
+            presenter.save(movie)
         }
 
         dialog.show()

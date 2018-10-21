@@ -4,6 +4,6 @@ import br.com.jwk.thefixt.data.model.Movie
 
 
 interface OMDbService {
-    fun searchMovie(title: String, onSuccess: (Movie) -> Unit, onError: (String) -> Unit)
+    fun searchMovie(imdbId: String, onSuccess: (Movie) -> Unit, onError: (String) -> Unit)
     fun searchMovies(title: String, page: Int = 1, onSuccess: (movies: List<Movie>, totalResults: Int) -> Unit, onError: (String) -> Unit)
 }

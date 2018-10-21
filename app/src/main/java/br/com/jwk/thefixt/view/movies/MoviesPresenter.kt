@@ -7,21 +7,28 @@ import br.com.jwk.thefixt.data.remote.OwnerService
 class MoviesPresenter(val service: OMDbService, val ownerService: OwnerService) : MoviesContract.Presenter {
 
     override lateinit var view: MoviesContract.View
+    private val onDefaultError = { message: String ->
+        view.hideLoading()
+        view.showMessage("Falhou!", message)
+    }
 
     override fun init() {
-        view.showLoading()
+        if (ownerService.isLogged()) {
+            view.loginLoaded()
+        } else {
+            view.showLoading()
 
-        if (!ownerService.isLogged()) {
             ownerService.login("thefixt", "123456", {
                 view.hideLoading()
                 view.loginLoaded()
-            }, {
-                view.showMessage("Falhou", it)
-            })
+            }, onDefaultError)
         }
     }
 
     override fun loadRemoteStoreMovies() {
+        ownerService.loadRemoteStoreMovies({
+            view.storeMoviesLoaded(it)
+        }, onDefaultError)
     }
 
     override fun loadLocalStoreMovies() {
@@ -37,12 +44,17 @@ class MoviesPresenter(val service: OMDbService, val ownerService: OwnerService) 
             } else {
                 view.searchMoviesLoaded(movies)
             }
-        }, { error ->
-            view.hideLoading()
-            view.showMessage("Falhou!", error)
-        })
+        }, onDefaultError)
     }
 
-    override fun save(movie: Movie) {
+    override fun save(partialMovie: Movie) {
+        view.showLoading()
+
+        service.searchMovie(partialMovie.imdbID, { movie ->
+            ownerService.save(movie, {
+                view.hideLoading()
+                view.moviewSaved(movie)
+            }, onDefaultError)
+        }, onDefaultError)
     }
 }

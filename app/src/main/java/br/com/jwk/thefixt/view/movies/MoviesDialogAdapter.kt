@@ -27,7 +27,7 @@ class MoviesDialogAdapter(context: Context, val movies: List<Movie>) : RecyclerV
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
-            itemView.setOnClickListener {
+            itemView.imdImgDownload.setOnClickListener {
                 onItemClick?.invoke(movies[adapterPosition])
             }
         }

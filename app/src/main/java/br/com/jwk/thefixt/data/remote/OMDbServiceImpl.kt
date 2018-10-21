@@ -13,8 +13,8 @@ class OMDbServiceImpl(private val retrofit: Retrofit) : OMDbService {
 
     private val api by lazy { retrofit.create(OMDbApi::class.java) }
 
-    override fun searchMovie(title: String, onSuccess: (Movie) -> Unit, onError: (String) -> Unit) {
-        api.searchMovie(title, BuildConfig.OMDB_API_KEY).exec(onError) { movieDto ->
+    override fun searchMovie(imdbId: String, onSuccess: (Movie) -> Unit, onError: (String) -> Unit) {
+        api.searchMovie(imdbId, BuildConfig.OMDB_API_KEY).exec(onError) { movieDto ->
             onSuccess(movieDto.toMovie())
         }
     }
